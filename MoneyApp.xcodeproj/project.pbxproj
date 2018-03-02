@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5E56A4AB2049ABCD00F2F112 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4AA2049ABCC00F2F112 /* NetworkManager.swift */; };
 		5EF4ACA9204997A1005AB916 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF4ACA8204997A1005AB916 /* AppDelegate.swift */; };
 		5EF4ACAB204997A1005AB916 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF4ACAA204997A1005AB916 /* ViewController.swift */; };
 		5EF4ACAE204997A1005AB916 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EF4ACAC204997A1005AB916 /* Main.storyboard */; };
@@ -14,6 +15,7 @@
 		5EF4ACB3204997A1005AB916 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EF4ACB1204997A1005AB916 /* LaunchScreen.storyboard */; };
 		5EF4ACBE204997A2005AB916 /* MoneyAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF4ACBD204997A2005AB916 /* MoneyAppTests.swift */; };
 		5EF4ACC9204997A2005AB916 /* MoneyAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF4ACC8204997A2005AB916 /* MoneyAppUITests.swift */; };
+		5EF4ACD72049A24E005AB916 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF4ACD62049A24E005AB916 /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5E56A4AA2049ABCC00F2F112 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		5EF4ACA5204997A1005AB916 /* MoneyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF4ACA8204997A1005AB916 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EF4ACAA204997A1005AB916 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -47,6 +50,7 @@
 		5EF4ACC4204997A2005AB916 /* MoneyAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoneyAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF4ACC8204997A2005AB916 /* MoneyAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyAppUITests.swift; sourceTree = "<group>"; };
 		5EF4ACCA204997A2005AB916 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		5EF4ACD62049A24E005AB916 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,10 +103,12 @@
 			children = (
 				5EF4ACA8204997A1005AB916 /* AppDelegate.swift */,
 				5EF4ACAA204997A1005AB916 /* ViewController.swift */,
+				5EF4ACD62049A24E005AB916 /* MainViewController.swift */,
 				5EF4ACAC204997A1005AB916 /* Main.storyboard */,
 				5EF4ACAF204997A1005AB916 /* Assets.xcassets */,
 				5EF4ACB1204997A1005AB916 /* LaunchScreen.storyboard */,
 				5EF4ACB4204997A1005AB916 /* Info.plist */,
+				5E56A4AA2049ABCC00F2F112 /* NetworkManager.swift */,
 			);
 			path = MoneyApp;
 			sourceTree = "<group>";
@@ -259,6 +265,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E56A4AB2049ABCD00F2F112 /* NetworkManager.swift in Sources */,
+				5EF4ACD72049A24E005AB916 /* MainViewController.swift in Sources */,
 				5EF4ACAB204997A1005AB916 /* ViewController.swift in Sources */,
 				5EF4ACA9204997A1005AB916 /* AppDelegate.swift in Sources */,
 			);
