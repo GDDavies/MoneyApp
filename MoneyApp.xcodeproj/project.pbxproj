@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		5E56A4AB2049ABCD00F2F112 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4AA2049ABCC00F2F112 /* NetworkManager.swift */; };
-		5E56A4AD2049B41E00F2F112 /* AuthError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4AC2049B41E00F2F112 /* AuthError.swift */; };
 		5E56A4AF2049B80D00F2F112 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4AE2049B80D00F2F112 /* Product.swift */; };
 		5E56A4B12049C99500F2F112 /* AccountTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4B02049C99500F2F112 /* AccountTableViewCell.swift */; };
 		5E56A4B32049CE5300F2F112 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4B22049CE5300F2F112 /* Extensions.swift */; };
+		5E56A4B52049EF8D00F2F112 /* Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4B42049EF8D00F2F112 /* Appearance.swift */; };
+		5E56A4B72049F8DD00F2F112 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4B62049F8DD00F2F112 /* AuthManager.swift */; };
 		5EF4ACA9204997A1005AB916 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF4ACA8204997A1005AB916 /* AppDelegate.swift */; };
 		5EF4ACAB204997A1005AB916 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF4ACAA204997A1005AB916 /* LoginViewController.swift */; };
 		5EF4ACAE204997A1005AB916 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EF4ACAC204997A1005AB916 /* Main.storyboard */; };
@@ -47,10 +48,11 @@
 		308193E8BD9CC2C56EA1DB67 /* Pods_MoneyApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MoneyApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		33E97FC5106345E7006FA15E /* Pods-MoneyAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MoneyAppUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MoneyAppUITests/Pods-MoneyAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		5E56A4AA2049ABCC00F2F112 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
-		5E56A4AC2049B41E00F2F112 /* AuthError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthError.swift; sourceTree = "<group>"; };
 		5E56A4AE2049B80D00F2F112 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		5E56A4B02049C99500F2F112 /* AccountTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountTableViewCell.swift; sourceTree = "<group>"; };
 		5E56A4B22049CE5300F2F112 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		5E56A4B42049EF8D00F2F112 /* Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Appearance.swift; sourceTree = "<group>"; };
+		5E56A4B62049F8DD00F2F112 /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		5EF4ACA5204997A1005AB916 /* MoneyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF4ACA8204997A1005AB916 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EF4ACAA204997A1005AB916 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -111,6 +113,63 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		5E56A4B82049F8EF00F2F112 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				5E56A4B22049CE5300F2F112 /* Extensions.swift */,
+				5E56A4B42049EF8D00F2F112 /* Appearance.swift */,
+				5EF4ACA8204997A1005AB916 /* AppDelegate.swift */,
+				5EF4ACAF204997A1005AB916 /* Assets.xcassets */,
+				5EF4ACB1204997A1005AB916 /* LaunchScreen.storyboard */,
+				5EF4ACB4204997A1005AB916 /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		5E56A4B92049F90E00F2F112 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				5EF4ACAA204997A1005AB916 /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		5E56A4BA2049F91700F2F112 /* Accounts */ = {
+			isa = PBXGroup;
+			children = (
+				5EF4ACD62049A24E005AB916 /* AccountsController.swift */,
+				5E56A4B02049C99500F2F112 /* AccountTableViewCell.swift */,
+			);
+			path = Accounts;
+			sourceTree = "<group>";
+		};
+		5E56A4BB2049F95100F2F112 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5E56A4AE2049B80D00F2F112 /* Product.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5E56A4BC2049F96800F2F112 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				5E56A4B62049F8DD00F2F112 /* AuthManager.swift */,
+				5E56A4AA2049ABCC00F2F112 /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
+		5E56A4BD2049F97600F2F112 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				5EF4ACAC204997A1005AB916 /* Main.storyboard */,
+				5E56A4B92049F90E00F2F112 /* Login */,
+				5E56A4BA2049F91700F2F112 /* Accounts */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		5EF4AC9C204997A1005AB916 = {
 			isa = PBXGroup;
 			children = (
@@ -136,18 +195,10 @@
 		5EF4ACA7204997A1005AB916 /* MoneyApp */ = {
 			isa = PBXGroup;
 			children = (
-				5EF4ACA8204997A1005AB916 /* AppDelegate.swift */,
-				5EF4ACAC204997A1005AB916 /* Main.storyboard */,
-				5EF4ACAA204997A1005AB916 /* LoginViewController.swift */,
-				5EF4ACD62049A24E005AB916 /* AccountsController.swift */,
-				5E56A4B02049C99500F2F112 /* AccountTableViewCell.swift */,
-				5EF4ACAF204997A1005AB916 /* Assets.xcassets */,
-				5EF4ACB1204997A1005AB916 /* LaunchScreen.storyboard */,
-				5EF4ACB4204997A1005AB916 /* Info.plist */,
-				5E56A4AA2049ABCC00F2F112 /* NetworkManager.swift */,
-				5E56A4AC2049B41E00F2F112 /* AuthError.swift */,
-				5E56A4AE2049B80D00F2F112 /* Product.swift */,
-				5E56A4B22049CE5300F2F112 /* Extensions.swift */,
+				5E56A4BD2049F97600F2F112 /* Views */,
+				5E56A4BC2049F96800F2F112 /* Managers */,
+				5E56A4BB2049F95100F2F112 /* Models */,
+				5E56A4B82049F8EF00F2F112 /* Supporting Files */,
 			);
 			path = MoneyApp;
 			sourceTree = "<group>";
@@ -479,13 +530,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				5E56A4AB2049ABCD00F2F112 /* NetworkManager.swift in Sources */,
+				5E56A4B52049EF8D00F2F112 /* Appearance.swift in Sources */,
 				5EF4ACD72049A24E005AB916 /* AccountsController.swift in Sources */,
 				5EF4ACAB204997A1005AB916 /* LoginViewController.swift in Sources */,
 				5E56A4B32049CE5300F2F112 /* Extensions.swift in Sources */,
 				5EF4ACA9204997A1005AB916 /* AppDelegate.swift in Sources */,
 				5E56A4B12049C99500F2F112 /* AccountTableViewCell.swift in Sources */,
-				5E56A4AD2049B41E00F2F112 /* AuthError.swift in Sources */,
 				5E56A4AF2049B80D00F2F112 /* Product.swift in Sources */,
+				5E56A4B72049F8DD00F2F112 /* AuthManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -655,6 +707,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CALM89H945;
 				INFOPLIST_FILE = MoneyApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gdaviesdev.MoneyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -671,6 +724,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = CALM89H945;
 				INFOPLIST_FILE = MoneyApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.gdaviesdev.MoneyApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -29,11 +29,13 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        NetworkManager.getProducts { products in
-            self.products = products
+        self.showLoadingIndicator()
+        NetworkManager.getProducts { [weak self] products in
+            self?.hideLoadingIndicator()
+            self?.products = products
         }
     }
     
@@ -52,8 +54,20 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     @objc private func logoutPressed(_ sender: UIButton) {
+        self.showLoadingIndicator()
+
 //        UserDefaults.standard.set(nil, forKey: loginTokenKey)
-        self.navigationController?.popViewController(animated: true)
+        NetworkManager.logout { [weak self] success in
+            guard let strongSelf = self else { return }
+            
+            strongSelf.hideLoadingIndicator()
+            
+            if success {
+                strongSelf.navigationController?.popViewController(animated: true)
+            } else {
+                // Unable to logout alert
+            }
+        }
     }
     
     // MARK: - TableView methods

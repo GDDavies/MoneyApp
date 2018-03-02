@@ -39,8 +39,16 @@ struct Product {
         self.maxDeposit = data["MaximumDeposit"] as? Double
     }
     
-    static func convertToCurrency(amount: Double) -> String? {
-        return ""
+    static func convertToCurrency(amount: Double?) -> String? {
+        guard let amount = amount else { return nil }
+        
+        let formatter = NumberFormatter()
+        formatter.locale = Locale.init(identifier: "en-GB")
+        formatter.numberStyle = .currency
+        if let formattedAmount = formatter.string(from: amount as NSNumber) {
+            return formattedAmount
+        }
+        return nil
     }
 }
 

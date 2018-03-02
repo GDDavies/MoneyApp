@@ -1,5 +1,5 @@
 //
-//  Extensions.swift
+//  AuthManager.swift
 //  MoneyApp
 //
 //  Created by George Davies on 02/03/2018.
@@ -7,8 +7,14 @@
 //
 
 import Foundation
-import MBProgressHUD
 
-extension UIViewController {
+struct AuthManager {
     
+}
+
+struct AuthError {
+    
+    static func loginError() {
+        
+    }
 }
