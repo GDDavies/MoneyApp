@@ -40,8 +40,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             let passwordText = passwordTextField.text
             else { return }
         
+        self.showLoadingIndicator()
         NetworkManager.login(email: emailText, password: passwordText) { [weak self] token in
             guard let strongSelf = self else { return }
+            strongSelf.hideLoadingIndicator()
             
             if let token = token {
 //                UserDefaults.standard.set(token, forKey: loginTokenKey)

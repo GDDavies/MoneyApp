@@ -11,11 +11,6 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="HelveticaNeue.ttc">
-            <string>HelveticaNeue</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -107,38 +102,36 @@
                                             <rect key="frame" x="0.0" y="0.0" width="342" height="59.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KM1-Ka-jzv">
-                                                    <rect key="frame" x="67" y="8" width="276" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KM1-Ka-jzv">
+                                                    <rect key="frame" x="67" y="8" width="276" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Balance" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFL-rk-2uz">
-                                                    <rect key="frame" x="67" y="31" width="276" height="21"/>
+                                                    <rect key="frame" x="67" y="31.5" width="276" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="G" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MmR-Vn-xTO">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Pound" translatesAutoresizingMaskIntoConstraints="NO" id="NPC-F1-DyS">
                                                     <rect key="frame" x="15" y="8" width="43.5" height="43.5"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="MmR-Vn-xTO" secondAttribute="height" multiplier="1:1" id="ZU7-Zw-8jA"/>
+                                                        <constraint firstAttribute="height" constant="43.5" id="Aka-mp-HXF"/>
+                                                        <constraint firstAttribute="width" secondItem="NPC-F1-DyS" secondAttribute="height" multiplier="1:1" id="EVw-px-wJk"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="KM1-Ka-jzv" firstAttribute="leading" secondItem="MmR-Vn-xTO" secondAttribute="trailing" constant="8" id="46M-Tf-o1H"/>
                                                 <constraint firstItem="KM1-Ka-jzv" firstAttribute="trailing" secondItem="mFL-rk-2uz" secondAttribute="trailing" id="4Lr-5c-jeQ"/>
-                                                <constraint firstAttribute="bottom" secondItem="MmR-Vn-xTO" secondAttribute="bottom" constant="8" id="Eoz-YN-4Ij"/>
-                                                <constraint firstItem="MmR-Vn-xTO" firstAttribute="leading" secondItem="yvc-oo-F6g" secondAttribute="leading" constant="15" id="JCo-1I-lIv"/>
-                                                <constraint firstItem="MmR-Vn-xTO" firstAttribute="top" secondItem="yvc-oo-F6g" secondAttribute="top" constant="8" id="RM6-K6-5w8"/>
-                                                <constraint firstItem="mFL-rk-2uz" firstAttribute="bottom" secondItem="MmR-Vn-xTO" secondAttribute="bottom" id="ajO-BC-uhj"/>
+                                                <constraint firstItem="NPC-F1-DyS" firstAttribute="centerY" secondItem="yvc-oo-F6g" secondAttribute="centerY" id="HcN-ac-Svj"/>
+                                                <constraint firstAttribute="bottom" secondItem="NPC-F1-DyS" secondAttribute="bottom" constant="8" id="Lxy-BW-7tm"/>
+                                                <constraint firstItem="NPC-F1-DyS" firstAttribute="leading" secondItem="yvc-oo-F6g" secondAttribute="leading" constant="15" id="Ra2-5V-WvA"/>
+                                                <constraint firstItem="KM1-Ka-jzv" firstAttribute="top" secondItem="NPC-F1-DyS" secondAttribute="top" id="Y7j-jF-5zo"/>
                                                 <constraint firstItem="mFL-rk-2uz" firstAttribute="leading" secondItem="KM1-Ka-jzv" secondAttribute="leading" id="cMJ-2P-FVw"/>
-                                                <constraint firstItem="KM1-Ka-jzv" firstAttribute="top" secondItem="MmR-Vn-xTO" secondAttribute="top" id="kMN-aO-SqS"/>
-                                                <constraint firstItem="MmR-Vn-xTO" firstAttribute="centerY" secondItem="yvc-oo-F6g" secondAttribute="centerY" id="oVh-o2-AiK"/>
+                                                <constraint firstItem="KM1-Ka-jzv" firstAttribute="leading" secondItem="NPC-F1-DyS" secondAttribute="trailing" constant="8.5" id="liS-90-8aw"/>
+                                                <constraint firstItem="mFL-rk-2uz" firstAttribute="bottom" secondItem="NPC-F1-DyS" secondAttribute="bottom" id="uFW-Dd-o24"/>
+                                                <constraint firstItem="NPC-F1-DyS" firstAttribute="top" secondItem="yvc-oo-F6g" secondAttribute="top" constant="8" id="xqC-Sr-8rc"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <constraints>
@@ -147,7 +140,7 @@
                                         <connections>
                                             <outlet property="accountBalanceLabel" destination="mFL-rk-2uz" id="MYQ-ww-HlO"/>
                                             <outlet property="accountNameLabel" destination="KM1-Ka-jzv" id="C67-6w-aQz"/>
-                                            <outlet property="accountTypeIcon" destination="MmR-Vn-xTO" id="1x7-lw-ksa"/>
+                                            <outlet property="accountTypeIcon" destination="NPC-F1-DyS" id="VDc-V1-SxX"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -210,5 +203,6 @@
     </scenes>
     <resources>
         <image name="Logo" width="1560" height="496"/>
+        <image name="Pound" width="50" height="50"/>
     </resources>
 </document>

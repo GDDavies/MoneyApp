@@ -10,18 +10,24 @@ import UIKit
 
 class AccountTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var accountTypeIcon: UILabel!
+    @IBOutlet weak var accountTypeIcon: UIImageView!
     @IBOutlet weak var accountNameLabel: UILabel!
     @IBOutlet weak var accountBalanceLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
+        accountTypeIcon.roundCorners()
     }
 
     func setup(product: Product) {
+        
+        if let productId = product.productId, let colour = Appearance.productColour[productId] {
+            accountTypeIcon.backgroundColor = colour
+        }
+        
         accountNameLabel.text = product.name
-        accountBalanceLabel.text = "£\(product.planValue?.description)"
+        accountBalanceLabel.text = Product.convertToCurrency(amount: product.planValue)
     }
 
 }
