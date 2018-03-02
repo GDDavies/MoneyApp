@@ -1,0 +1,6 @@
+framework module Pods_MoneyAppTests {
+  umbrella header "Pods-MoneyAppTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

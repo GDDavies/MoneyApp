@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MBProgressHUD
 
-class ViewController: UIViewController, UITextFieldDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
@@ -21,6 +22,9 @@ class ViewController: UIViewController, UITextFieldDelegate {
 
         emailTextField.delegate = self
         passwordTextField.delegate = self
+        
+        emailTextField.text = "test+env12@moneyboxapp.com"
+        passwordTextField.text = "Money$$box@107"
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,6 +35,21 @@ class ViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Login
     
     @IBAction func loginPressed(_ sender: UIButton) {
+        guard
+            let emailText = emailTextField.text,
+            let passwordText = passwordTextField.text
+            else { return }
+        
+        NetworkManager.login(email: emailText, password: passwordText) { [weak self] token in
+            guard let strongSelf = self else { return }
+            
+            if let token = token {
+//                UserDefaults.standard.set(token, forKey: loginTokenKey)
+                strongSelf.performSegue(withIdentifier: "ShowAccounts", sender: strongSelf)
+            } else {
+                // Handle login error
+            }
+        }
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
