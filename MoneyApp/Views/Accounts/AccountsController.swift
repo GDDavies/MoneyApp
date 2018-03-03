@@ -46,7 +46,7 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
             if status == 200 {
                 strongSelf.products = products
             } else if let status = status {
-                NetworkError.getProductsError(status: status)
+                NetworkError.returnErrorFromStatusCode(status)
             }
         }
     }
@@ -104,17 +104,14 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
         return 60
     }
     
-
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if let vc = segue.destination as? AccountDetailViewController,
+        let cell = sender as? AccountTableViewCell,
+        let indexPath = tableView.indexPath(for: cell) {
+            vc.selectedProduct = products?[indexPath.row]
+        }
     }
-    */
-    
-
-
+ 
 }

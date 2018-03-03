@@ -28,7 +28,7 @@ struct NetworkManager {
         }
     }
     
-    static func login(email: String, password: String, completionHandler: @escaping (String?, String?) -> Void) {
+    static func login(email: String, password: String, completionHandler: @escaping (Bool, String?) -> Void) {
         
         let parameters: [String: Any] = [
             "Email": email,
@@ -51,7 +51,7 @@ struct NetworkManager {
                 
                 let message = data?["Message"] as? String
                 
-                completionHandler(accessToken, message)
+                completionHandler(accessToken != nil, message)
             })
     }
     
@@ -88,7 +88,7 @@ struct NetworkManager {
             })
     }
     
-    static func makeOneOffPayment(amount: Double, productId: Int, completionHandler: @escaping (Int?) -> Void) {
+    static func makeOneOffPayment(amount: Int, productId: Int, completionHandler: @escaping (Int?) -> Void) {
         
         let parameters: [String: Any] = [
             "Amount": amount,
@@ -113,7 +113,7 @@ struct NetworkError {
         
     }
     
-    static func getProductsError(status: Int) -> String? {
+    static func returnErrorFromStatusCode(_ status: Int) -> String? {
         switch status {
         case 401:
             return "Your session has expired. Please login again."

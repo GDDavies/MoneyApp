@@ -51,7 +51,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             validateError = passwordError
         }
         if let error = validateError {
-            AlertView.showAlert(view: self, title: "Error", message: error)
+            let alert = AlertView.showAlert(title: "Error", message: error)
+            self.present(alert, animated: true, completion: nil)
             return
         }
         login(email: emailText, password: passwordText)
@@ -59,15 +60,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func login(email: String, password: String) {
         showLoadingIndicator()
-        NetworkManager.login(email: email, password: password) { [weak self] token, message in
+        NetworkManager.login(email: email, password: password) { [weak self] success, message in
             guard let strongSelf = self else { return }
             strongSelf.hideLoadingIndicator()
             
-            if let token = token {
+            if success {
                 //                UserDefaults.standard.set(token, forKey: loginTokenKey)
                 strongSelf.performSegue(withIdentifier: "ShowAccounts", sender: strongSelf)
             } else if let message = message {
-                AlertView.showAlert(view: strongSelf, title: "Error", message: message)
+                let alert = AlertView.showAlert(title: "Error", message: message)
+                strongSelf.present(alert, animated: true, completion: nil)
             } else {
                 // Unknown error
             }

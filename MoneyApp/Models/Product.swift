@@ -13,6 +13,7 @@ struct Product {
     var productId: Int?
     var productType: ProductType?
     var moneybox: Double?
+    var previousMoneybox: Double?
     var subscriptionAmount: Double?
     var planValue: Double?
     var contributedYTD: Double?
@@ -32,6 +33,7 @@ struct Product {
         self.productId = data["InvestorProductId"] as? Int
         self.productType = ProductType(rawValue: productType)
         self.moneybox = moneybox as? Double
+        self.previousMoneybox = data["PreviousMoneybox"] as? Double
         self.subscriptionAmount = subscriptionAmount as? Double
         self.planValue = planValue as? Double
         self.contributedYTD = data["Sytd"] as? Double
