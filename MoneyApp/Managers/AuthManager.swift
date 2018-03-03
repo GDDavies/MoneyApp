@@ -6,15 +6,13 @@
 //  Copyright © 2018 GeorgeDavies. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct AuthManager {
-    
-}
-
-struct AuthError {
-    
-    static func loginError() {
-        
+    static func logoutUser(vc: UIViewController) {
+        NetworkManager.accessToken = nil
+        vc.navigationController?.popToRootViewController(animated: true)
     }
 }
+
+

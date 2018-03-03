@@ -11,10 +11,13 @@ import UIKit
 class AccountsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var moneyBoxAmountLabel: UILabel!
     
     var products: [Product]? {
         didSet {
-            tableView.reloadData()
+            OperationQueue.main.addOperation {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -32,10 +35,19 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        getProducts()
+    }
+    
+    private func getProducts() {
         self.showLoadingIndicator()
-        NetworkManager.getProducts { [weak self] products in
-            self?.hideLoadingIndicator()
-            self?.products = products
+        NetworkManager.getProducts { [weak self] products, status in
+            guard let strongSelf = self else { return }
+            strongSelf.hideLoadingIndicator()
+            if status == 200 {
+                strongSelf.products = products
+            } else if let status = status {
+                NetworkError.getProductsError(status: status)
+            }
         }
     }
     
@@ -61,9 +73,10 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
             guard let strongSelf = self else { return }
             
             strongSelf.hideLoadingIndicator()
-            
+            AuthManager.logoutUser(vc: strongSelf)
+
             if success {
-                strongSelf.navigationController?.popViewController(animated: true)
+                // Logout?
             } else {
                 // Unable to logout alert
             }
