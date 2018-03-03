@@ -26,6 +26,9 @@ struct TextFieldManager {
         case .deposit:
             if input.isEmpty {
                 return "Please enter a deposit amount"
+            } else if let amount = Int(input),
+            amount > 2000 {
+                return "Maximum deposit is £2000, please enter an amount less than this"
             }
         }
         return nil
