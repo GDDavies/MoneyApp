@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AccountDetailViewController: UIViewController {
+class AccountDetailViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var currentMoneybox: UILabel!
     @IBOutlet weak var lastWeekMoneybox: UILabel!
@@ -19,6 +19,9 @@ class AccountDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        depositAmountTextField.delegate = self
+        addDoneButtonToNumpad()
         reloadAmounts()
     }
     
@@ -90,6 +93,31 @@ class AccountDetailViewController: UIViewController {
             })
             strongSelf.reloadAmounts()
         }
+    }
+    
+    // MARK: - TextField Methods
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text
+            else { return true }
+ 
+        let newLength = text.count + string.count - range.length
+        
+        let allowedCharacters = CharacterSet.decimalDigits
+        let characterSet = CharacterSet(charactersIn: string)
+        return allowedCharacters.isSuperset(of: characterSet) && newLength <= 4
+    }
+    
+    private func addDoneButtonToNumpad() {
+        
+        let numpadToolbar = UIToolbar()
+        
+        numpadToolbar.items = [
+            UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: self, action: nil),
+            UIBarButtonItem(title: "Done", style: .done, target: depositAmountTextField, action: #selector(UITextField.resignFirstResponder))
+        ]
+        numpadToolbar.sizeToFit()
+        depositAmountTextField.inputAccessoryView = numpadToolbar
     }
 
 }
