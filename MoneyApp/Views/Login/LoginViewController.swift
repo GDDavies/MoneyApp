@@ -35,21 +35,41 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     // MARK: - Login
     
     @IBAction func loginPressed(_ sender: UIButton) {
+        
+        // TODO Text field validation
+        
         guard
             let emailText = emailTextField.text,
             let passwordText = passwordTextField.text
             else { return }
         
-        self.showLoadingIndicator()
-        NetworkManager.login(email: emailText, password: passwordText) { [weak self] token in
+        var validateError: String?
+        
+        if let emailError = TextFieldManager.validate(input: emailText, type: .email) {
+            validateError = emailError
+        } else if let passwordError = TextFieldManager.validate(input: passwordText, type: .password) {
+            validateError = passwordError
+        }
+        if let error = validateError {
+            AlertView.showAlert(view: self, title: "Error", message: error)
+            return
+        }
+        login(email: emailText, password: passwordText)
+    }
+    
+    private func login(email: String, password: String) {
+        showLoadingIndicator()
+        NetworkManager.login(email: email, password: password) { [weak self] token, message in
             guard let strongSelf = self else { return }
             strongSelf.hideLoadingIndicator()
             
             if let token = token {
-//                UserDefaults.standard.set(token, forKey: loginTokenKey)
+                //                UserDefaults.standard.set(token, forKey: loginTokenKey)
                 strongSelf.performSegue(withIdentifier: "ShowAccounts", sender: strongSelf)
+            } else if let message = message {
+                AlertView.showAlert(view: strongSelf, title: "Error", message: message)
             } else {
-                // Handle login error
+                // Unknown error
             }
         }
     }

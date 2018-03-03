@@ -28,7 +28,7 @@ struct NetworkManager {
         }
     }
     
-    static func login(email: String, password: String, completionHandler: @escaping (String?) -> Void) {
+    static func login(email: String, password: String, completionHandler: @escaping (String?, String?) -> Void) {
         
         let parameters: [String: Any] = [
             "Email": email,
@@ -48,7 +48,10 @@ struct NetworkManager {
                 let sessionData = data?["Session"] as? [String: Any]
 
                 accessToken = sessionData?["BearerToken"] as? String
-                completionHandler(accessToken)
+                
+                let message = data?["Message"] as? String
+                
+                completionHandler(accessToken, message)
             })
     }
     
@@ -57,21 +60,22 @@ struct NetworkManager {
             method: .post,
             encoding: JSONEncoding.default,
             headers: headers)
-            
             .responseJSON(completionHandler: { response in
+                debugPrint(response)
+
                 completionHandler(response.response?.statusCode == 200)
             })
     }
     
-    static func getProducts(completionHandler: @escaping ([Product]) -> Void) {
+    static func getProducts(completionHandler: @escaping ([Product], Int?) -> Void) {
         Alamofire.request("\(baseUrl)/investorproduct/thisweek",
             method: .get,
             encoding: JSONEncoding.default,
             headers: headers)
             
             .responseJSON(completionHandler: { response in
+                debugPrint(response)
                 var tempProductArray = [Product]()
-                
                 if let data = response.result.value as? [String: Any],
                     let productsArray = data["Products"] as? [[String: Any]] {
                     for product in productsArray {
@@ -80,11 +84,11 @@ struct NetworkManager {
                         }
                     }
                 }
-                completionHandler(tempProductArray)
+                completionHandler(tempProductArray, response.response?.statusCode)
             })
     }
     
-    static func makeOneOffPayment(amount: Decimal, productId: Int, completionHandler: @escaping (Bool) -> Void) {
+    static func makeOneOffPayment(amount: Double, productId: Int, completionHandler: @escaping (Int?) -> Void) {
         
         let parameters: [String: Any] = [
             "Amount": amount,
@@ -97,7 +101,26 @@ struct NetworkManager {
             headers: headers)
             
             .responseJSON(completionHandler: { response in
-                completionHandler(response.response?.statusCode == 200)
+                debugPrint(response)
+                completionHandler(response.response?.statusCode)
             })
+    }
+}
+
+struct NetworkError {
+    
+    static func loginError(status: Int) {
+        
+    }
+    
+    static func getProductsError(status: Int) -> String? {
+        switch status {
+        case 401:
+            return "Your session has expired. Please login again."
+        case 400:
+            return "Sorry, it isn't possible to perform that action."
+        default:
+            return "Uknown Error"
+        }
     }
 }
