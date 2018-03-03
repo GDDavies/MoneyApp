@@ -10,32 +10,67 @@ import UIKit
 
 class AccountDetailViewController: UIViewController {
 
+    @IBOutlet weak var currentMoneybox: UILabel!
+    @IBOutlet weak var lastWeekMoneybox: UILabel!
     @IBOutlet weak var depositAmountTextField: UITextField!
+    
+    var selectedProduct: Product?
+    var productUpdated = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        reloadAmounts()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    private func reloadAmounts() {
+        guard
+            let selectedProduct = self.selectedProduct,
+            let current = Product.convertToCurrency(amount: selectedProduct.moneybox),
+            let lastWeek = Product.convertToCurrency(amount: selectedProduct.previousMoneybox)
+            else { return }
         
-
+        OperationQueue.main.addOperation {
+            self.currentMoneybox.text = current
+            self.lastWeekMoneybox.text = lastWeek
+        }
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func confirmDepositPressed(_ sender: UIButton) {
+        guard
+            let depositText = depositAmountTextField.text,
+            let product = self.selectedProduct,
+            let productId = product.productId
+            else { return }
+        
+        if let depositError = TextFieldManager.validate(input: depositText, type: .deposit) {
+            let alert = AlertView.showAlert(title: "Error", message: depositError)
+            self.present(alert, animated: true, completion: nil)
+            return
+        }
+        if let deposit = Int(depositText) {
+            makeOneOffDeposit(deposit: deposit, productId: productId)
+        }
     }
     
-    @IBAction func confirmDepositPressed(_ sender: UIButton) {
-        NetworkManager.makeOneOffPayment(amount: 20, productId: 3205) { [weak self] responseCode in
+    private func makeOneOffDeposit(deposit: Int, productId: Int) {
+        NetworkManager.makeOneOffPayment(amount: deposit, productId: productId) { [weak self] responseCode in
             guard let strongSelf = self else { return }
             
-            if responseCode == 401 {
+            strongSelf.productUpdated = false
+            
+            if responseCode == 200 {
+                strongSelf.getUpdatedProduct()
+                let alert = AlertView.showAlert(title: "Deposit Successful", message: "£\(deposit.description) deposited successfully", completionHandler: {
+                    if !strongSelf.productUpdated {
+                        strongSelf.showLoadingIndicator()
+                    }
+                })
+                strongSelf.present(alert, animated: true, completion: nil)
+                strongSelf.depositAmountTextField.text = nil
+            } else if responseCode == 401 {
                 let alert = AlertView.showLogoutAlert(title: "Session Expires",
                                                       message: "Your session has expired and you will be logged out. Please log back in to continue.",
-                                                      completion: {
+                                                      completionHandler: {
                                                         AuthManager.logoutUser(vc: strongSelf)
                 })
                 strongSelf.present(alert, animated: true, completion: nil)
@@ -43,14 +78,18 @@ class AccountDetailViewController: UIViewController {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    private func getUpdatedProduct() {
+        NetworkManager.getProducts { [weak self] products, reponseCode in
+            guard let strongSelf = self else { return }
+            
+            strongSelf.productUpdated = true
+            strongSelf.hideLoadingIndicator()
+            
+            strongSelf.selectedProduct = products.first(where: {
+                $0.productId == strongSelf.selectedProduct?.productId
+            })
+            strongSelf.reloadAmounts()
+        }
     }
-    */
 
 }

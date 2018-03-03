@@ -9,20 +9,23 @@
 import UIKit
 
 struct AlertView {
-    static func showAlert(view: UIViewController, title: String, message: String) {
+    static func showAlert(title: String, message: String, completionHandler: (() -> Void)? = nil) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        view.present(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: "OK", style: .default) { _ in
+            guard let completionHandler = completionHandler else { return }
+            completionHandler()
+        })
+        return alert
     }
     
-    static func showLogoutAlert(title: String, message: String?, completion: (() -> Void)? = nil) -> UIAlertController {
+    static func showLogoutAlert(title: String, message: String?, completionHandler: (() -> Void)? = nil) -> UIAlertController {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
         alert.addAction(cancel)
         
         let logoutAction = UIAlertAction(title: "Logout", style: .destructive) { _ in
-            guard let completion = completion else { return }
+            guard let completion = completionHandler else { return }
             completion()
         }
         alert.addAction(logoutAction)
