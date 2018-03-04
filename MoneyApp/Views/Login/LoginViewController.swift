@@ -84,14 +84,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         }
         return false
     }
-    
-    // MARK: - Navigation
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
- 
-
-    }
-
 
 }
 

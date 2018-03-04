@@ -47,6 +47,7 @@ struct Product {
         let formatter = NumberFormatter()
         formatter.locale = Locale.init(identifier: "en-GB")
         formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 0
         if let formattedAmount = formatter.string(from: amount as NSNumber) {
             return formattedAmount
         }

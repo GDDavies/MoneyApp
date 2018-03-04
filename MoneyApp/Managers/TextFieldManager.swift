@@ -10,7 +10,7 @@ import Foundation
 
 struct TextFieldManager {
     
-    static func validate(input: String?, type: TextFieldType) -> String? {
+    static func validate(input: String?, type: TextFieldType, maxDeposit: Double? = nil) -> String? {
         
         guard let input = input else { return nil }
         
@@ -18,6 +18,11 @@ struct TextFieldManager {
         case .email:
             if input.isEmpty {
                 return "Please enter an email address"
+            } else {
+                let regex = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+                if !NSPredicate(format: "SELF MATCHES[c] %@", regex).evaluate(with: input) {
+                    return "Please enter a valid email address"
+                }
             }
         case .password:
             if input.isEmpty || input.count < 8 {
@@ -26,9 +31,9 @@ struct TextFieldManager {
         case .deposit:
             if input.isEmpty {
                 return "Please enter a deposit amount"
-            } else if let amount = Int(input),
-            amount > 2000 {
-                return "Maximum deposit is £2000, please enter an amount less than this"
+            } else if let amount = Double(input), let max = maxDeposit, amount > max,
+            let maxString = Product.convertToCurrency(amount: max) {
+                return "Maximum deposit is \(maxString) - please enter an amount less than this"
             }
         }
         return nil

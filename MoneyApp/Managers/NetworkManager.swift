@@ -55,7 +55,7 @@ struct NetworkManager {
             })
     }
     
-    static func logout(completionHandler: @escaping (Bool) -> Void) {
+    static func logout(completionHandler: @escaping () -> Void) {
         Alamofire.request("\(baseUrl)/users/logout",
             method: .post,
             encoding: JSONEncoding.default,
@@ -63,7 +63,7 @@ struct NetworkManager {
             .response(completionHandler: { response in
                 debugPrint(response)
                 
-                completionHandler(response.response?.statusCode == 200)
+                completionHandler()
             })
     }
     
@@ -113,14 +113,14 @@ struct NetworkError {
         
     }
     
-    static func returnErrorFromStatusCode(_ status: Int) -> String? {
+    static func returnErrorFromStatusCode(_ status: Int) -> String {
         switch status {
         case 401:
             return "Your session has expired. Please login again."
         case 400:
             return "Sorry, it isn't possible to perform that action."
         default:
-            return "Uknown Error"
+            return "Uknown error, please try again."
         }
     }
 }

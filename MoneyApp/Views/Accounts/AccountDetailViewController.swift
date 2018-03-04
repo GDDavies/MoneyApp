@@ -11,8 +11,13 @@ import UIKit
 class AccountDetailViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet weak var currentMoneybox: UILabel!
-    @IBOutlet weak var lastWeekMoneybox: UILabel!
     @IBOutlet weak var depositAmountTextField: UITextField!
+    @IBOutlet weak var currencyLabel: UILabel!
+    
+    @IBOutlet weak var weeklySubscriptionLabel: UILabel!
+    @IBOutlet weak var contributedYTDLabel: UILabel!
+    @IBOutlet weak var transferredYTDLabel: UILabel!
+    @IBOutlet weak var annualAllowanceRemainingLabel: UILabel!
     
     var selectedProduct: Product?
     var productUpdated = false
@@ -20,7 +25,13 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.title = selectedProduct?.name
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.navigationController?.navigationBar.tintColor = .black
+        
+        depositAmountTextField.setLeftPadding(9)
         depositAmountTextField.delegate = self
+        
         addDoneButtonToNumpad()
         reloadAmounts()
     }
@@ -28,13 +39,24 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
     private func reloadAmounts() {
         guard
             let selectedProduct = self.selectedProduct,
-            let current = Product.convertToCurrency(amount: selectedProduct.moneybox),
-            let lastWeek = Product.convertToCurrency(amount: selectedProduct.previousMoneybox)
+            let current = Product.convertToCurrency(amount: selectedProduct.moneybox)
             else { return }
         
         OperationQueue.main.addOperation {
             self.currentMoneybox.text = current
-            self.lastWeekMoneybox.text = lastWeek
+            
+            if let subAmount = Product.convertToCurrency(amount: selectedProduct.subscriptionAmount) {
+                self.weeklySubscriptionLabel.text = subAmount
+            }
+            if let contributedAmount = Product.convertToCurrency(amount: selectedProduct.contributedYTD) {
+                self.contributedYTDLabel.text = contributedAmount
+            }
+            if let transferredAmount = Product.convertToCurrency(amount: selectedProduct.transferredInYTD) {
+                self.transferredYTDLabel.text = transferredAmount
+            }
+            if let remainingAmount = Product.convertToCurrency(amount: selectedProduct.maxDeposit) {
+                self.annualAllowanceRemainingLabel.text = remainingAmount
+            }
         }
     }
 
@@ -42,10 +64,14 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
         guard
             let depositText = depositAmountTextField.text,
             let product = self.selectedProduct,
-            let productId = product.productId
+            let productId = product.productId,
+            let maxDeposit = product.maxDeposit
             else { return }
         
-        if let depositError = TextFieldManager.validate(input: depositText, type: .deposit) {
+        if let depositError = TextFieldManager.validate(input: depositText,
+                                                        type: .deposit,
+                                                        maxDeposit: maxDeposit) {
+            
             let alert = AlertView.showAlert(title: "Error", message: depositError)
             self.present(alert, animated: true, completion: nil)
             return
@@ -77,6 +103,9 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
                                                         AuthManager.logoutUser(vc: strongSelf)
                 })
                 strongSelf.present(alert, animated: true, completion: nil)
+            } else {
+                let alert = AlertView.showAlert(title: "Network Error", message: NetworkError.returnErrorFromStatusCode(responseCode ?? 0))
+                strongSelf.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -102,10 +131,18 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
             else { return true }
  
         let newLength = text.count + string.count - range.length
-        
         let allowedCharacters = CharacterSet.decimalDigits
         let characterSet = CharacterSet(charactersIn: string)
-        return allowedCharacters.isSuperset(of: characterSet) && newLength <= 4
+        
+        return allowedCharacters.isSuperset(of: characterSet) && newLength <= 5
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        currencyLabel.textColor = .black
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        currencyLabel.textColor = .lightGray
     }
     
     private func addDoneButtonToNumpad() {

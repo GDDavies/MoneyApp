@@ -43,10 +43,12 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
         NetworkManager.getProducts { [weak self] products, status in
             guard let strongSelf = self else { return }
             strongSelf.hideLoadingIndicator()
+            
             if status == 200 {
                 strongSelf.products = products
             } else if let status = status {
-                NetworkError.returnErrorFromStatusCode(status)
+                let alert = AlertView.showAlert(title: "Error", message: NetworkError.returnErrorFromStatusCode(status))
+                strongSelf.present(alert, animated: true, completion: nil)
             }
         }
     }
@@ -68,18 +70,9 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
     @objc private func logoutPressed(_ sender: UIButton) {
         self.showLoadingIndicator()
 
-//        UserDefaults.standard.set(nil, forKey: loginTokenKey)
-        NetworkManager.logout { [weak self] success in
-            guard let strongSelf = self else { return }
-            
-            strongSelf.hideLoadingIndicator()
-            AuthManager.logoutUser(vc: strongSelf)
-
-            if success {
-                // Logout?
-            } else {
-                // Unable to logout alert
-            }
+        NetworkManager.logout {
+            self.hideLoadingIndicator()
+            AuthManager.logoutUser(vc: self)
         }
     }
     
