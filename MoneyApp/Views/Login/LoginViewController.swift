@@ -13,7 +13,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-
     
     // MARK: - VC Lifecycle
     
@@ -26,18 +25,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         emailTextField.text = "test+env12@moneyboxapp.com"
         passwordTextField.text = "Money$$box@107"
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-
-    }
     
     // MARK: - Login
     
     @IBAction func loginPressed(_ sender: UIButton) {
-        
-        // TODO Text field validation
-        
         guard
             let emailText = emailTextField.text,
             let passwordText = passwordTextField.text
@@ -65,13 +56,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             strongSelf.hideLoadingIndicator()
             
             if token != nil {
-                //                UserDefaults.standard.set(token, forKey: loginTokenKey)
                 strongSelf.performSegue(withIdentifier: "ShowAccounts", sender: strongSelf)
-            } else if let message = message {
-                let alert = AlertView.showAlert(title: "Error", message: message)
-                strongSelf.present(alert, animated: true, completion: nil)
             } else {
-                // Unknown error
+                let alert = AlertView.showAlert(title: "Error",
+                                                message: message ?? "An unexpected error has occurred, please try again.")
+                strongSelf.present(alert, animated: true, completion: nil)
             }
         }
     }

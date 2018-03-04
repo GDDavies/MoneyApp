@@ -11,7 +11,6 @@ import UIKit
 class AccountsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var moneyBoxAmountLabel: UILabel!
     
     var products: [Product]? {
         didSet {
@@ -21,22 +20,16 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    // MARK: - VC Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupNavBar()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
         getProducts()
     }
+    
+    // MARK: - Products
     
     private func getProducts() {
         self.showLoadingIndicator()
@@ -47,7 +40,11 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
             if status == 200 {
                 strongSelf.products = products
             } else if let status = status {
-                let alert = AlertView.showAlert(title: "Error", message: NetworkError.returnErrorFromStatusCode(status))
+                let alert = AlertView.showAlert(title: "Error", message: MoneyAppError.returnErrorFromStatusCode(status), completionHandler: {
+                    if status == 401 {
+                        AuthManager.logoutUser(vc: strongSelf)
+                    }
+                })
                 strongSelf.present(alert, animated: true, completion: nil)
             }
         }

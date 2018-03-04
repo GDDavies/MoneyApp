@@ -74,20 +74,18 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
             
             let alert = AlertView.showAlert(title: "Error", message: depositError)
             self.present(alert, animated: true, completion: nil)
-            return
-        }
-        if let deposit = Int(depositText) {
+            
+        } else if let deposit = Int(depositText) {
             makeOneOffDeposit(deposit: deposit, productId: productId)
         }
     }
     
     private func makeOneOffDeposit(deposit: Int, productId: Int) {
-        NetworkManager.makeOneOffPayment(amount: deposit, productId: productId) { [weak self] responseCode in
+        NetworkManager.makeOneOffPayment(amount: deposit, productId: productId) { [weak self] status in
             guard let strongSelf = self else { return }
-            
             strongSelf.productUpdated = false
-            
-            if responseCode == 200 {
+
+            if status == 200 {
                 strongSelf.getUpdatedProduct()
                 let alert = AlertView.showAlert(title: "Deposit Successful", message: "£\(deposit.description) deposited successfully", completionHandler: {
                     if !strongSelf.productUpdated {
@@ -96,31 +94,42 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
                 })
                 strongSelf.present(alert, animated: true, completion: nil)
                 strongSelf.depositAmountTextField.text = nil
-            } else if responseCode == 401 {
-                let alert = AlertView.showLogoutAlert(title: "Session Expires",
-                                                      message: "Your session has expired and you will be logged out. Please log back in to continue.",
-                                                      completionHandler: {
-                                                        AuthManager.logoutUser(vc: strongSelf)
-                })
-                strongSelf.present(alert, animated: true, completion: nil)
             } else {
-                let alert = AlertView.showAlert(title: "Network Error", message: NetworkError.returnErrorFromStatusCode(responseCode ?? 0))
+                let alert = AlertView.showAlert(title: "Error",
+                                                message: MoneyAppError.returnErrorFromStatusCode(status),
+                                                completionHandler: {
+                    if status == 401 {
+                        AuthManager.logoutUser(vc: strongSelf)
+                    }
+                })
                 strongSelf.present(alert, animated: true, completion: nil)
             }
         }
     }
     
     private func getUpdatedProduct() {
-        NetworkManager.getProducts { [weak self] products, reponseCode in
+        NetworkManager.getProducts { [weak self] products, status in
             guard let strongSelf = self else { return }
             
             strongSelf.productUpdated = true
             strongSelf.hideLoadingIndicator()
             
-            strongSelf.selectedProduct = products.first(where: {
-                $0.productId == strongSelf.selectedProduct?.productId
-            })
-            strongSelf.reloadAmounts()
+            if status == 200 {
+                strongSelf.selectedProduct = products.first(where: {
+                    $0.productId == strongSelf.selectedProduct?.productId
+                })
+                strongSelf.reloadAmounts()
+            } else {
+                let alert = AlertView.showAlert(title: "Error",
+                                                message: MoneyAppError.returnErrorFromStatusCode(status),
+                                                completionHandler: {
+                    if status == 401 {
+                        AuthManager.logoutUser(vc: strongSelf)
+                    }
+                })
+                strongSelf.present(alert, animated: true, completion: nil)
+            }
+            
         }
     }
     

@@ -21,11 +21,9 @@ class AccountTableViewCell: UITableViewCell {
     }
 
     func setup(product: Product) {
-        
         if let productId = product.productId, let colour = Appearance.productColour[productId] {
             accountTypeIcon.backgroundColor = colour
         }
-        
         accountNameLabel.text = product.name
         accountBalanceLabel.text = Product.convertToCurrency(amount: product.planValue)
     }

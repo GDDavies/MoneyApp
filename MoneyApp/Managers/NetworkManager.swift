@@ -107,13 +107,11 @@ struct NetworkManager {
     }
 }
 
-struct NetworkError {
-    
-    static func loginError(status: Int) {
+struct MoneyAppError {
         
-    }
-    
-    static func returnErrorFromStatusCode(_ status: Int) -> String {
+    static func returnErrorFromStatusCode(_ status: Int?) -> String {
+        guard let status = status else { return "Uknown error, please try again." }
+        
         switch status {
         case 401:
             return "Your session has expired. Please login again."

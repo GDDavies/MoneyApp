@@ -40,7 +40,7 @@ struct Product {
         self.contributedYTD = data["Sytd"] as? Double
         self.transferredInYTD = data["TransferInSytd"] as? Double
         self.maxDeposit = data["MaximumDeposit"] as? Double
-        if let valuationData = data["Valuations"] as? [[String: Any]] {v
+        if let valuationData = data["Valuations"] as? [[String: Any]] {
             let tempValuationArray = valuationData.flatMap { valuationDict in
                 Valuation.init(data: valuationDict)!
             }
