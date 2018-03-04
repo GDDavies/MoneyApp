@@ -19,6 +19,7 @@ struct Product {
     var contributedYTD: Double?
     var transferredInYTD: Double?
     var maxDeposit: Double?
+    var valuations: [Valuation]?
     
     init?(data: [String: Any]) {
         guard
@@ -39,6 +40,15 @@ struct Product {
         self.contributedYTD = data["Sytd"] as? Double
         self.transferredInYTD = data["TransferInSytd"] as? Double
         self.maxDeposit = data["MaximumDeposit"] as? Double
+        if let valuationData = data["Valuations"] as? [[String: Any]] {
+            var tempValuationArray = [Valuation]()
+            for valuationDict in valuationData {
+                if let tempVal = Valuation.init(data: valuationDict) {
+                    tempValuationArray.append(tempVal)
+                }
+            }
+            self.valuations = tempValuationArray
+        }
     }
     
     static func convertToCurrency(amount: Double?) -> String? {
@@ -52,6 +62,31 @@ struct Product {
             return formattedAmount
         }
         return nil
+    }
+}
+
+struct Valuation {
+    
+    var fundGroupName: String?
+    var fundName: String?
+    var unitPrice: Double?
+    var units: Double?
+    var fundValue: Double?
+    
+    init?(data: [String: Any]) {
+        guard
+            let fundGroupName = data["FundGroupName"] as? String,
+            let fundName = data["FundName"] as? String,
+            let unitPrice = data["UnitPrice"] as? Double,
+            let units = data["Units"] as? Double,
+            let fundValue = data["FundValue"] as? Double
+            else { return }
+        
+        self.fundGroupName = fundGroupName
+        self.fundName = fundName
+        self.unitPrice = unitPrice
+        self.units = units
+        self.fundValue = fundValue
     }
 }
 
