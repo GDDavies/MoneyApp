@@ -28,7 +28,7 @@ struct NetworkManager {
         }
     }
     
-    static func login(email: String, password: String, completionHandler: @escaping (Bool, String?) -> Void) {
+    static func login(email: String, password: String, completionHandler: @escaping (String?, String?) -> Void) {
         
         let parameters: [String: Any] = [
             "Email": email,
@@ -51,7 +51,7 @@ struct NetworkManager {
                 
                 let message = data?["Message"] as? String
                 
-                completionHandler(accessToken != nil, message)
+                completionHandler(accessToken, message)
             })
     }
     
@@ -60,9 +60,9 @@ struct NetworkManager {
             method: .post,
             encoding: JSONEncoding.default,
             headers: headers)
-            .responseJSON(completionHandler: { response in
+            .response(completionHandler: { response in
                 debugPrint(response)
-
+                
                 completionHandler(response.response?.statusCode == 200)
             })
     }

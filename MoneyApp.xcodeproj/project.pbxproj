@@ -16,12 +16,14 @@
 		5E56A4BF204ABA5D00F2F112 /* AccountDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4BE204ABA5D00F2F112 /* AccountDetailViewController.swift */; };
 		5E56A4C1204AD0C800F2F112 /* AlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4C0204AD0C800F2F112 /* AlertView.swift */; };
 		5E56A4C3204AEFA200F2F112 /* TextFieldManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4C2204AEFA200F2F112 /* TextFieldManager.swift */; };
+		5E56A4C5204C45EE00F2F112 /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4C4204C45EE00F2F112 /* NetworkTests.swift */; };
+		5E56A4C6204C464800F2F112 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4AE2049B80D00F2F112 /* Product.swift */; };
+		5E56A4C7204C465300F2F112 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E56A4AA2049ABCC00F2F112 /* NetworkManager.swift */; };
 		5EF4ACA9204997A1005AB916 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF4ACA8204997A1005AB916 /* AppDelegate.swift */; };
 		5EF4ACAB204997A1005AB916 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF4ACAA204997A1005AB916 /* LoginViewController.swift */; };
 		5EF4ACAE204997A1005AB916 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EF4ACAC204997A1005AB916 /* Main.storyboard */; };
 		5EF4ACB0204997A1005AB916 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5EF4ACAF204997A1005AB916 /* Assets.xcassets */; };
 		5EF4ACB3204997A1005AB916 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5EF4ACB1204997A1005AB916 /* LaunchScreen.storyboard */; };
-		5EF4ACBE204997A2005AB916 /* MoneyAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF4ACBD204997A2005AB916 /* MoneyAppTests.swift */; };
 		5EF4ACC9204997A2005AB916 /* MoneyAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF4ACC8204997A2005AB916 /* MoneyAppUITests.swift */; };
 		5EF4ACD72049A24E005AB916 /* AccountsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF4ACD62049A24E005AB916 /* AccountsController.swift */; };
 		7CF2B41BB1CD5D1902D574DF /* Pods_MoneyAppUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1185076DC3A5E7BBD916CF77 /* Pods_MoneyAppUITests.framework */; };
@@ -59,6 +61,7 @@
 		5E56A4BE204ABA5D00F2F112 /* AccountDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountDetailViewController.swift; sourceTree = "<group>"; };
 		5E56A4C0204AD0C800F2F112 /* AlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertView.swift; sourceTree = "<group>"; };
 		5E56A4C2204AEFA200F2F112 /* TextFieldManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldManager.swift; sourceTree = "<group>"; };
+		5E56A4C4204C45EE00F2F112 /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
 		5EF4ACA5204997A1005AB916 /* MoneyApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MoneyApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF4ACA8204997A1005AB916 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5EF4ACAA204997A1005AB916 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -67,7 +70,6 @@
 		5EF4ACB2204997A1005AB916 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		5EF4ACB4204997A1005AB916 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EF4ACB9204997A2005AB916 /* MoneyAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoneyAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		5EF4ACBD204997A2005AB916 /* MoneyAppTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyAppTests.swift; sourceTree = "<group>"; };
 		5EF4ACBF204997A2005AB916 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5EF4ACC4204997A2005AB916 /* MoneyAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MoneyAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5EF4ACC8204997A2005AB916 /* MoneyAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoneyAppUITests.swift; sourceTree = "<group>"; };
@@ -215,8 +217,8 @@
 		5EF4ACBC204997A2005AB916 /* MoneyAppTests */ = {
 			isa = PBXGroup;
 			children = (
-				5EF4ACBD204997A2005AB916 /* MoneyAppTests.swift */,
 				5EF4ACBF204997A2005AB916 /* Info.plist */,
+				5E56A4C4204C45EE00F2F112 /* NetworkTests.swift */,
 			);
 			path = MoneyAppTests;
 			sourceTree = "<group>";
@@ -557,7 +559,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EF4ACBE204997A2005AB916 /* MoneyAppTests.swift in Sources */,
+				5E56A4C7204C465300F2F112 /* NetworkManager.swift in Sources */,
+				5E56A4C5204C45EE00F2F112 /* NetworkTests.swift in Sources */,
+				5E56A4C6204C464800F2F112 /* Product.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

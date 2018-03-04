@@ -60,11 +60,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     private func login(email: String, password: String) {
         showLoadingIndicator()
-        NetworkManager.login(email: email, password: password) { [weak self] success, message in
+        NetworkManager.login(email: email, password: password) { [weak self] token, message in
             guard let strongSelf = self else { return }
             strongSelf.hideLoadingIndicator()
             
-            if success {
+            if token != nil {
                 //                UserDefaults.standard.set(token, forKey: loginTokenKey)
                 strongSelf.performSegue(withIdentifier: "ShowAccounts", sender: strongSelf)
             } else if let message = message {
