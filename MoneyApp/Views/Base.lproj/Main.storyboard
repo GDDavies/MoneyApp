@@ -265,14 +265,14 @@
                                     <constraint firstItem="Afp-4B-5P8" firstAttribute="leading" secondItem="rFe-Jr-2go" secondAttribute="leading" constant="12" id="zDX-Fq-WI1"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One-off deposit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KrJ-vZ-9iq">
-                                <rect key="frame" x="126.5" y="307" width="122" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="One-off moneybox deposit" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KrJ-vZ-9iq">
+                                <rect key="frame" x="95.5" y="337" width="184.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ByZ-sH-Adq">
-                                <rect key="frame" x="56" y="458" width="262.5" height="45"/>
+                                <rect key="frame" x="56" y="457" width="262.5" height="45"/>
                                 <color key="backgroundColor" red="0.37256205079999999" green="0.74651741979999997" blue="0.72765821220000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="f46-6m-0UD"/>
@@ -290,14 +290,20 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Deposit amount" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="S1Y-RM-IRZ">
-                                <rect key="frame" x="56.5" y="368" width="262.5" height="30"/>
+                                <rect key="frame" x="56.5" y="367" width="262.5" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad" enablesReturnKeyAutomatically="YES" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="£" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pzW-0J-LdF">
-                                <rect key="frame" x="60.5" y="373" width="9.5" height="18"/>
+                                <rect key="frame" x="60.5" y="372" width="9.5" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Account Amount" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fEh-Cp-0RO">
+                                <rect key="frame" x="16" y="286" width="343" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -306,20 +312,24 @@
                             <constraint firstItem="pzW-0J-LdF" firstAttribute="top" secondItem="S1Y-RM-IRZ" secondAttribute="bottom" constant="-25" id="3ml-VS-pyQ"/>
                             <constraint firstItem="ByZ-sH-Adq" firstAttribute="width" secondItem="S1Y-RM-IRZ" secondAttribute="width" id="4ox-Bj-SWk"/>
                             <constraint firstItem="pzW-0J-LdF" firstAttribute="leading" secondItem="S1Y-RM-IRZ" secondAttribute="leading" constant="4" id="7sV-nz-pxX"/>
-                            <constraint firstItem="S1Y-RM-IRZ" firstAttribute="top" secondItem="KrJ-vZ-9iq" secondAttribute="bottom" constant="40" id="JKt-FA-4ai"/>
+                            <constraint firstItem="S1Y-RM-IRZ" firstAttribute="top" secondItem="KrJ-vZ-9iq" secondAttribute="bottom" constant="12" id="JKt-FA-4ai"/>
+                            <constraint firstItem="fEh-Cp-0RO" firstAttribute="top" secondItem="rFe-Jr-2go" secondAttribute="bottom" constant="12" id="JUo-he-PhQ"/>
+                            <constraint firstItem="KrJ-vZ-9iq" firstAttribute="top" secondItem="fEh-Cp-0RO" secondAttribute="bottom" constant="30" id="Ja3-kg-PTI"/>
                             <constraint firstItem="S1Y-RM-IRZ" firstAttribute="width" secondItem="QCx-Mm-Bfj" secondAttribute="width" multiplier="0.7" id="VIN-CC-0RH"/>
-                            <constraint firstItem="KrJ-vZ-9iq" firstAttribute="top" secondItem="rFe-Jr-2go" secondAttribute="bottom" constant="33" id="XMR-rE-t4q"/>
                             <constraint firstItem="rFe-Jr-2go" firstAttribute="top" secondItem="pmd-DQ-nSg" secondAttribute="top" id="Y51-yk-5PF"/>
                             <constraint firstItem="S1Y-RM-IRZ" firstAttribute="centerX" secondItem="pmd-DQ-nSg" secondAttribute="centerX" id="ZVn-xc-2Kz"/>
+                            <constraint firstItem="pmd-DQ-nSg" firstAttribute="trailing" secondItem="fEh-Cp-0RO" secondAttribute="trailing" constant="16" id="ZaQ-e2-dmB"/>
                             <constraint firstItem="ByZ-sH-Adq" firstAttribute="top" secondItem="S1Y-RM-IRZ" secondAttribute="bottom" constant="60" id="chF-8a-Lkd"/>
                             <constraint firstItem="rFe-Jr-2go" firstAttribute="leading" secondItem="pmd-DQ-nSg" secondAttribute="leading" id="mDN-Xe-HSg"/>
                             <constraint firstItem="KrJ-vZ-9iq" firstAttribute="centerX" secondItem="pmd-DQ-nSg" secondAttribute="centerX" id="os4-GH-Bqp"/>
+                            <constraint firstItem="fEh-Cp-0RO" firstAttribute="leading" secondItem="pmd-DQ-nSg" secondAttribute="leading" constant="16" id="qaJ-xg-HRi"/>
                             <constraint firstItem="rFe-Jr-2go" firstAttribute="trailing" secondItem="pmd-DQ-nSg" secondAttribute="trailing" id="rlp-RX-Pqs"/>
                             <constraint firstItem="ByZ-sH-Adq" firstAttribute="centerX" secondItem="pmd-DQ-nSg" secondAttribute="centerX" id="xo9-yl-4V8"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pmd-DQ-nSg"/>
                     </view>
                     <connections>
+                        <outlet property="accountAmountLabel" destination="fEh-Cp-0RO" id="f62-EE-VBp"/>
                         <outlet property="annualAllowanceRemainingLabel" destination="oyh-nR-72D" id="4RB-oE-S9q"/>
                         <outlet property="contributedYTDLabel" destination="7w7-yU-4MC" id="BJp-zf-HTM"/>
                         <outlet property="currencyLabel" destination="pzW-0J-LdF" id="tWy-7f-IAg"/>
@@ -349,7 +359,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="21v-zq-6jv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-446" y="134"/>
+            <point key="canvasLocation" x="-713" y="134"/>
         </scene>
     </scenes>
     <resources>

@@ -13,6 +13,7 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var currentMoneybox: UILabel!
     @IBOutlet weak var depositAmountTextField: UITextField!
     @IBOutlet weak var currencyLabel: UILabel!
+    @IBOutlet weak var accountAmountLabel: UILabel!
     
     @IBOutlet weak var weeklySubscriptionLabel: UILabel!
     @IBOutlet weak var contributedYTDLabel: UILabel!
@@ -49,11 +50,14 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
     private func reloadAmounts() {
         guard
             let selectedProduct = self.selectedProduct,
-            let current = Product.convertToCurrency(amount: selectedProduct.moneybox)
+            let current = Product.convertToCurrency(amount: selectedProduct.moneybox),
+            let planName = selectedProduct.name,
+            let planValue = Product.convertToCurrency(amount: selectedProduct.planValue)
             else { return }
         
         DispatchQueue.main.async() {
             self.currentMoneybox.text = current
+            self.accountAmountLabel.text = "\(planName) - \(planValue)"
             
             if let subAmount = Product.convertToCurrency(amount: selectedProduct.subscriptionAmount) {
                 self.weeklySubscriptionLabel.text = subAmount
