@@ -5,6 +5,10 @@ This is a light version of the moneybox app using the moneybox test/staging envi
 ### Authorisation
 Each logged in user is authorised using a token with a sliding expiration of 5 mins. For each relevant network call, the app checks the response for a `401 Unauthorized` and if it is found then the user is logged out.
 
+The login endpoint requires a unique identifier and the documentation calls this an "Idfa" however Apple discourages its use if no adverts are present in the app, therefore the `UUID` was used instead.
+
+The app doesn't check on startup whether or not the user already has an existing token - it assumes they don't and forces a login. This is because if the app has retsarted then it is likely that the user would have needed a new token from logging in again anyway. This also follows the behaviour of most financial apps which, for good reason, generally prioritise security over user experience.
+
 ### Limitations/Future Improvements
 There are some basic unit tests included to test the network calls to the API however in future these tests would be improved so that the resulting data from the network calls in injected. This would mean that the tests wouldn't require a valid auth token - currently they do and so only unauthenticated network calls are currently tested.
 
