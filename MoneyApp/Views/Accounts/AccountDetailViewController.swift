@@ -19,6 +19,7 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var transferredYTDLabel: UILabel!
     @IBOutlet weak var annualAllowanceRemainingLabel: UILabel!
     
+    var delegate: AccountsDelegate?
     var selectedProduct: Product?
     var productUpdated = false
     
@@ -42,7 +43,7 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
             let current = Product.convertToCurrency(amount: selectedProduct.moneybox)
             else { return }
         
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async() {
             self.currentMoneybox.text = current
             
             if let subAmount = Product.convertToCurrency(amount: selectedProduct.subscriptionAmount) {
@@ -77,19 +78,22 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
             
         } else if let deposit = Int(depositText) {
             makeOneOffDeposit(deposit: deposit, productId: productId)
+            self.showLoadingIndicator()
         }
     }
     
     private func makeOneOffDeposit(deposit: Int, productId: Int) {
         NetworkManager.makeOneOffPayment(amount: deposit, productId: productId) { [weak self] status in
             guard let strongSelf = self else { return }
+            
+            strongSelf.hideLoadingIndicator()
             strongSelf.productUpdated = false
-
+            
             if status == 200 {
                 strongSelf.getUpdatedProduct()
                 let alert = AlertView.showAlert(title: "Deposit Successful", message: "£\(deposit.description) deposited successfully", completionHandler: {
                     if !strongSelf.productUpdated {
-                        strongSelf.showLoadingIndicator()
+                        strongSelf.hideLoadingIndicator()
                     }
                 })
                 strongSelf.present(alert, animated: true, completion: nil)
@@ -119,6 +123,7 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
                     $0.productId == strongSelf.selectedProduct?.productId
                 })
                 strongSelf.reloadAmounts()
+                strongSelf.delegate?.productsUpdated(products: products)
             } else {
                 let alert = AlertView.showAlert(title: "Error",
                                                 message: MoneyAppError.returnErrorFromStatusCode(status),

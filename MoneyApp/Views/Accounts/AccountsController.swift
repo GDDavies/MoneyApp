@@ -8,13 +8,17 @@
 
 import UIKit
 
-class AccountsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+protocol AccountsDelegate {
+    func productsUpdated(products: [Product]?)
+}
 
+class AccountsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AccountsDelegate {
+    
     @IBOutlet weak var tableView: UITableView!
     
     var products: [Product]? {
         didSet {
-            OperationQueue.main.addOperation {
+            DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
         }
@@ -48,6 +52,10 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
                 strongSelf.present(alert, animated: true, completion: nil)
             }
         }
+    }
+    
+    func productsUpdated(products: [Product]?) {
+        self.products = products
     }
     
     // MARK: - Setup UI
@@ -100,6 +108,7 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
         if let vc = segue.destination as? AccountDetailViewController,
         let cell = sender as? AccountTableViewCell,
         let indexPath = tableView.indexPath(for: cell) {
+            vc.delegate = self
             vc.selectedProduct = products?[indexPath.row]
         }
     }
