@@ -23,6 +23,8 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
     var selectedProduct: Product?
     var productUpdated = false
     
+    // MARK: - VC Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -30,12 +32,19 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.navigationBar.topItem?.title = ""
         self.navigationController?.navigationBar.tintColor = .black
         
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(logoutUser),
+                                               name: Notification.Name.UIApplicationWillResignActive,
+                                               object: nil)
+        
         depositAmountTextField.setLeftPadding(9)
         depositAmountTextField.delegate = self
         
         addDoneButtonToNumpad()
         reloadAmounts()
     }
+    
+    // MARK: - Update UI
     
     private func reloadAmounts() {
         guard
@@ -60,6 +69,8 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    // MARK: - Deposit methods
 
     @IBAction func confirmDepositPressed(_ sender: UIButton) {
         guard
@@ -109,6 +120,12 @@ class AccountDetailViewController: UIViewController, UITextFieldDelegate {
                 strongSelf.present(alert, animated: true, completion: nil)
             }
         }
+    }
+    
+    // MARK: - User methods
+    
+    @objc private func logoutUser() {
+        AuthManager.logoutUser(vc: self)
     }
     
     private func getUpdatedProduct() {

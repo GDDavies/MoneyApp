@@ -28,7 +28,12 @@ class AccountsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(logoutPressed(_:)),
+                                               name: Notification.Name.UIApplicationWillResignActive,
+                                               object: nil)
+        
         setupNavBar()
         getProducts()
     }
