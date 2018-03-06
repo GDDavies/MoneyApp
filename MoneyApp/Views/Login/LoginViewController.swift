@@ -22,8 +22,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         emailTextField.delegate = self
         passwordTextField.delegate = self
         
-        emailTextField.text = "test+env12@moneyboxapp.com"
-        passwordTextField.text = "Money$$box@107"
+        // Hardcode username and password when testing if required
+        emailTextField.text = ""
+        passwordTextField.text = ""
     }
     
     // MARK: - Login
@@ -64,6 +65,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             }
         }
     }
+    
+    // MARK: - Textfield Delegate Methods
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if let nextField = textField.superview?.viewWithTag(textField.tag + 1) as? UITextField {
