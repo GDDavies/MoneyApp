@@ -41,9 +41,9 @@ struct Product {
         self.transferredInYTD = data["TransferInSytd"] as? Double
         self.maxDeposit = data["MaximumDeposit"] as? Double
         if let valuationData = data["Valuations"] as? [[String: Any]] {
-            let tempValuationArray = valuationData.flatMap { valuationDict in
-                Valuation.init(data: valuationDict)!
-            }
+            let tempValuationArray = valuationData.map { valuationDict in
+                Valuation.init(data: valuationDict)
+                }.flatMap { $0 }
             self.valuations = tempValuationArray
         }
     }
