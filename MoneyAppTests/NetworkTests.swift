@@ -27,8 +27,9 @@ class NetworkTests: XCTestCase {
         
         let e = expectation(description: "Alamofire")
         
-        let email = "test+env12@moneyboxapp.com"
-        let password = "Money$$box@107"
+        // Enter test credentials when testing
+        let email = ""
+        let password = ""
         
         NetworkManager.login(email: email, password: password) { token, message in
             XCTAssertNotNil(token)
