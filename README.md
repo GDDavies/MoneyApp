@@ -4,7 +4,7 @@ This is a light version of the moneybox app using the moneybox test/staging envi
 
 ## Installation Instructions
 1. Clone repository to local directory
-2. Run `pod install` in terminal to install Cocoapods
+2. Run `pod install` in terminal to install the required Cocoapods
 3. Open MoneyApp.xcworkspace in Xcode
 4. Run project
 
